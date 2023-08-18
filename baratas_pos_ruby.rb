@@ -20,8 +20,8 @@ def prices
 		"apple" => 7.50
 	}
 	print "Enter an item to verify price: "
-	  @item = gets.chomp
-	  puts "The price of this #{@item} is RM #{@product_price[@item]}"
+	@item = gets.chomp
+	puts "The price of this #{@item} is RM #{@product_price[@item]}"
 end
 
 def continue_browsing
@@ -30,15 +30,21 @@ def continue_browsing
 end
 
 def shop_cart_pick
-	   @cart << @item
-	   puts "Your Shopping Cart #{@cart}"
+	@cart << @item
+	puts "Your Shopping Cart #{@cart}"
 end
 
 def shop_cart_calc
 	@money += @product_price[@item]
-	puts "#{@money}"
+	puts "Total net amount: RM #{@money}"
 end
 
+ def payment(total_amount)
+ 	puts "Please enter cash"
+ 	customer_cash = gets.chomp.to_f
+ 	balance = customer_cash - total_amount
+ 	puts "Here is your balance amount after payment: RM #{balance.round(2)}"
+ end
 
 customer_name
 default_variable
@@ -46,6 +52,7 @@ loop do
 	prices
 	shop_cart_pick
 	shop_cart_calc
-	continue_browsing
-	break if @continuing != "y"
+    continue_browsing
+	break if @continuing != "y"	
 end
+payment(@money)
