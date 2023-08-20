@@ -5,12 +5,13 @@
 def default_variable #this method must be outside the loop
 	@cart = []
 	@net_amount = 0
-	@voucher = {"v10" => 0.9, "v50" => 0.5, "No" => 1}
+	@voucher = { "v10" => 0.9, "v50"=> 0.5, "No"=> 1}
 	@product_price = {
 		"fish" =>  5.55,
 		"egg" => 1.00,
 		"apple" => 7.50
 	}
+	#@products = [@product_price].to_s
 end
 
 def customer_name
@@ -24,10 +25,21 @@ def show_items
 	@product_price.each {|key, value| puts "#{key}"} #show all item lists(key)
 end
 
+# def prices
+# 	puts "Enter an item to verify price: "
+# 	loop do
+#     @item = gets.chomp
+#  	break if @item == @product_price.each
+#   	puts "Invalid item, please enter the correct item name."
+#  	end
+#  	puts "The price of this #{@item} is RM #{@product_price[@item]}"
+# end
+
+
 def prices
-	print "Enter an item to verify price: "
-	@item = gets.chomp
-	puts "The price of this #{@item} is RM #{@product_price[@item]}"
+    print "Enter an item to verify price: "
+ 	@item = gets.chomp
+   	puts "The price of this #{@item} is RM #{@product_price[@item]}"
 end
 
 def continue_browsing
@@ -47,11 +59,16 @@ end
 
 def voucher_discount
 	puts "Please enter voucher code if available. Enter No if no voucher."
-	@voucher_code = gets.chomp
-    @voucher_code == "v10" || "v50"	|| "No"
-	@after_discount = @net_amount * @voucher[@voucher_code]
-	puts "Total gross amount: RM #{@after_discount.round(2)}"
-    #@voucher_code == "No".to_i	 
+	while @voucher_code = gets.chomp
+		case @voucher_code
+		when @voucher_code == "0", "v10", "v50", "No" #not future proof as more data added later,"0" as placeholder cus got bug, cant read the 1st key
+			@after_discount = @net_amount * @voucher[@voucher_code]
+		    puts "Total gross amount: RM #{@after_discount.round(2)}"
+		    break
+		else
+			puts "Invalid code, please enter the correct voucher."
+		end	
+	end
 end
 
 def payment(total_amount)
@@ -63,6 +80,8 @@ def payment(total_amount)
     end
     balance = @customer_cash - total_amount
     puts "Here is your balance amount after payment: RM #{balance.round(2)}"
+    puts "Voucher applied: #{@voucher_code}, #{@voucher[@voucher_code]}"
+    puts "Thank you for shopping at our store and come again!"
 end
 
 #Start of program running
