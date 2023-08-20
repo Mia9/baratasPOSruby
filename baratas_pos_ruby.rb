@@ -25,22 +25,36 @@ def show_items
 	@product_price.each {|key, value| puts "#{key}"} #show all item lists(key)
 end
 
-# def prices
+def prices
+	puts "Enter an item to verify price: "
+	while @item = gets.chomp
+		case @item
+		when @item == "0", "egg", "fish", "apple" #not future proof as more data added later,"0" as placeholder cus got bug, cant read the 1st key
+			puts "The price of this #{@item} is RM #{@product_price[@item]}"
+		    break
+		else
+			puts "Invalid item, please enter the correct item name."
+		end	
+	end
+end
+
+
+# def prices ----not working! I want try use Hash keys as parameters
 # 	puts "Enter an item to verify price: "
 # 	loop do
 #     @item = gets.chomp
-#  	break if @item == @product_price.each
+#  	break if @item == @product_price.each #how to use keys as parameters?
 #   	puts "Invalid item, please enter the correct item name."
 #  	end
 #  	puts "The price of this #{@item} is RM #{@product_price[@item]}"
 # end
 
 
-def prices
-    print "Enter an item to verify price: "
- 	@item = gets.chomp
-   	puts "The price of this #{@item} is RM #{@product_price[@item]}"
-end
+# def prices ---simple method without re-prompt
+#   print "Enter an item to verify price: "
+#  	@item = gets.chomp
+#   puts "The price of this #{@item} is RM #{@product_price[@item]}"
+# end
 
 def continue_browsing
 	puts "Would you like to add more?"
