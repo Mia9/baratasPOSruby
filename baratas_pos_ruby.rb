@@ -11,7 +11,6 @@ def default_variable #this method must be outside the loop
 		"egg" => 1.00,
 		"apple" => 7.50
 	}
-	#@products = [@product_price].to_s
 end
 
 def customer_name
@@ -42,9 +41,9 @@ end
 # def prices ----not working! I want try use Hash keys as parameters
 # 	puts "Enter an item to verify price: "
 # 	loop do
-#     @item = gets.chomp
+#   @item = gets.chomp
 #  	break if @item == @product_price.each #how to use keys as parameters?
-#   	puts "Invalid item, please enter the correct item name."
+#   puts "Invalid item, please enter the correct item name."
 #  	end
 #  	puts "The price of this #{@item} is RM #{@product_price[@item]}"
 # end
